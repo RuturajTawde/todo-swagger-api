@@ -3,7 +3,7 @@ info:
   title: To-Do-List API
   version: 1.0.0
 servers:
-  - url: https:tbd.com/
+  - url: https://sid-getir-project.herokuapp.com
   - url: http://localhost:3000
 paths:
   /api/v1/todo:
