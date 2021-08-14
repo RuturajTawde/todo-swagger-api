@@ -1,10 +1,10 @@
 const Task = require("../models/records.model");
 
-const putTask = async (data) => {
+const putTask = async (id, data) => {
   try {
     const tasks = await Task.findOneAndUpdate(
       {
-        _id: data._id,
+        _id: id,
       },
       {
         name: data.name,

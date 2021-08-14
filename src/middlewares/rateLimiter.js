@@ -6,7 +6,7 @@ We can use an existing npm package like rate-limit-redis or build a custom solut
 */
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minutes
-  max: 10, // limit each IP to 10 requests
+  max: 25, // limit each IP to 25 requests
   handler: (req, res, next) =>
     next(formatErrorObject(errorList["error_429"]["rateLimit_exceeded"])),
 });

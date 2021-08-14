@@ -23,7 +23,7 @@
 Visit: <https://todolist-ruturaj.herokuapp.com/
 ```
 
-### **Rate Limit** - API has a rate limit of 10 requests per minute.
+## **Rate Limit** - API has a rate limit of 25 requests per minute.
 
 &nbsp;
 

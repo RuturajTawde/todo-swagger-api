@@ -31,7 +31,7 @@ paths:
               name: To learn React.
               completed: false
       responses:
-        200:
+        201:
           description: OK
           content:
             application/json:
@@ -75,6 +75,23 @@ paths:
                 status: 401
                 message: Invalid credentials provided.
                 error_code: invalid_credentials
+        404:
+          description: No record
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 404
+                message: Record not found
+                error_code: no_record
         429:
           description: Too Many Requests
           content:
@@ -158,6 +175,23 @@ paths:
                 status: 401
                 message: Invalid credentials provided.
                 error_code: invalid_credentials
+        404:
+          description: No record
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 404
+                message: Record not found
+                error_code: no_record
         429:
           description: Too Many Requests
           content:
@@ -196,7 +230,7 @@ paths:
     get:
       security:
         - ApiKeyAuth: []
-      summary: Get by id
+      summary: Get one task by id
       parameters:
         - name: id
           in: path
@@ -251,6 +285,23 @@ paths:
                 status: 401
                 message: Invalid credentials provided.
                 error_code: invalid_credentials
+        404:
+          description: No record
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 404
+                message: Record not found
+                error_code: no_record
         429:
           description: Too Many Requests
           content:
@@ -288,7 +339,16 @@ paths:
     put:
       security:
         - ApiKeyAuth: []
-      summary: Get by id
+      summary: Update task for mentioned id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: provide id to search
+          example: 61179725cf3cc60d38d2794c
+          schema:
+            type: string
+            description: Unique id of task
       requestBody:
         required: true
         content:
@@ -296,9 +356,6 @@ paths:
             schema:
               type: object
               properties:
-                _id:
-                  type: string
-                  description: Unique id of task
                 name:
                   type: string
                   description: Enter a task to do.
@@ -306,10 +363,7 @@ paths:
                   type: boolean
                   description: If the task is completed or not.
               additionalProperties: false
-              required:
-                - _id
             example:
-              _id: 61008027f8b4bf2eb41e76ef
               name: To learn React.
               completed: false
       responses:
@@ -357,6 +411,23 @@ paths:
                 status: 401
                 message: Invalid credentials provided.
                 error_code: invalid_credentials
+        404:
+          description: No record
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 404
+                message: Record not found
+                error_code: no_record
         429:
           description: Too Many Requests
           content:
@@ -394,30 +465,16 @@ paths:
     delete:
       security:
         - ApiKeyAuth: []
-      summary: Get by id
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                _id:
-                  type: string
-                  description: Unique id of task
-                name:
-                  type: string
-                  description: Enter a task to do.
-                completed:
-                  type: boolean
-                  description: If the task is completed or not.
-              additionalProperties: false
-              required:
-                - _id
-            example:
-              _id: 61008027f8b4bf2eb41e76ef
-              name: To learn React.
-              completed: false
+      summary: Delete task by giving id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: provide id to search
+          example: 61179725cf3cc60d38d2794c
+          schema:
+            type: string
+            description: Unique id of task
       responses:
         200:
           description: OK
@@ -463,6 +520,23 @@ paths:
                 status: 401
                 message: Invalid credentials provided.
                 error_code: invalid_credentials
+        404:
+          description: No record
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 404
+                message: Record not found
+                error_code: no_record
         429:
           description: Too Many Requests
           content:
