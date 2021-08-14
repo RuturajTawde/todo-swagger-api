@@ -1,0 +1,505 @@
+openapi: 3.0.0
+info:
+  title: To-Do-List API
+  version: 1.0.0
+servers:
+  - url: https:tbd.com/
+  - url: http://localhost:3000
+paths:
+  /api/v1/todo:
+    post:
+      security:
+        - ApiKeyAuth: []
+      summary: Creates to-do task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Enter a task to do.
+                completed:
+                  type: boolean
+                  description: If the task is completed or not.
+              additionalProperties: false
+              required:
+                - name
+            example:
+              name: To learn React.
+              completed: false
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  msg:
+                    type: string
+                  records:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      completed:
+                        type: boolean
+              example:
+                code: 0
+                msg: Success
+                records:
+                  - id: key_value
+                    name: To learn React
+                    completed: false
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 401
+                message: Invalid credentials provided.
+                error_code: invalid_credentials
+        429:
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 429
+                message: Rate limit exceeded.
+                error_code: limit_exceeded
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 500
+                message: Unable to process request.
+                error_code: server_error
+    get:
+      security:
+        - ApiKeyAuth: []
+      summary: Get data all the data
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  msg:
+                    type: string
+                  records:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      completed:
+                        type: boolean
+              example:
+                code: 0
+                msg: Success
+                records:
+                  - id: key_value
+                    name: To learn React
+                    completed: false
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 401
+                message: Invalid credentials provided.
+                error_code: invalid_credentials
+        429:
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 429
+                message: Rate limit exceeded.
+                error_code: limit_exceeded
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 500
+                message: Unable to process request.
+                error_code: server_error
+  /api/v1/todo/{id}:
+    get:
+      security:
+        - ApiKeyAuth: []
+      summary: Get by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: provide id to search
+          example: 61179725cf3cc60d38d2794c
+          schema:
+            type: string
+            description: Unique id of task
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  msg:
+                    type: string
+                  records:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      completed:
+                        type: boolean
+              example:
+                code: 0
+                msg: Success
+                records:
+                  - id: key_value
+                    name: To learn React
+                    completed: false
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 401
+                message: Invalid credentials provided.
+                error_code: invalid_credentials
+        429:
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 429
+                message: Rate limit exceeded.
+                error_code: limit_exceeded
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 500
+                message: Unable to process request.
+                error_code: server_error
+    put:
+      security:
+        - ApiKeyAuth: []
+      summary: Get by id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: string
+                  description: Unique id of task
+                name:
+                  type: string
+                  description: Enter a task to do.
+                completed:
+                  type: boolean
+                  description: If the task is completed or not.
+              additionalProperties: false
+              required:
+                - _id
+            example:
+              _id: 61008027f8b4bf2eb41e76ef
+              name: To learn React.
+              completed: false
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  msg:
+                    type: string
+                  records:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      completed:
+                        type: boolean
+              example:
+                code: 0
+                msg: Success
+                records:
+                  - id: key_value
+                    name: To learn React
+                    completed: false
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 401
+                message: Invalid credentials provided.
+                error_code: invalid_credentials
+        429:
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 429
+                message: Rate limit exceeded.
+                error_code: limit_exceeded
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 500
+                message: Unable to process request.
+                error_code: server_error
+    delete:
+      security:
+        - ApiKeyAuth: []
+      summary: Get by id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                _id:
+                  type: string
+                  description: Unique id of task
+                name:
+                  type: string
+                  description: Enter a task to do.
+                completed:
+                  type: boolean
+                  description: If the task is completed or not.
+              additionalProperties: false
+              required:
+                - _id
+            example:
+              _id: 61008027f8b4bf2eb41e76ef
+              name: To learn React.
+              completed: false
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  msg:
+                    type: string
+                  records:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      completed:
+                        type: boolean
+              example:
+                code: 0
+                msg: Success
+                records:
+                  - id: key_value
+                    name: To learn React
+                    completed: false
+        401:
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 401
+                message: Invalid credentials provided.
+                error_code: invalid_credentials
+        429:
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 429
+                message: Rate limit exceeded.
+                error_code: limit_exceeded
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  message:
+                    type: string
+                  error_code:
+                    type: string
+              example:
+                status: 500
+                message: Unable to process request.
+                error_code: server_error
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
